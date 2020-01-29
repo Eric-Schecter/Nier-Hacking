@@ -1,0 +1,14 @@
+{
+  "name":"Your_App",
+  "short_name":"Your_App",
+  "icons":[  {
+    "src": "./App_Icon.png",
+    "type": "image/png",
+    "sizes": "262x262"
+  }],
+  "theme_color":"black",
+  "background_color":"black",
+  "display":"standalone",
+  "start_url":"./index.html",
+  "scope": "."
+}

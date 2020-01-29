@@ -150,12 +150,12 @@ const productionConfig = merge([
     // },
     plugins: [
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        // title: 'MES Assembly Manager',
-        // favicon: 'favicon.ico',
-        template: './template/index.html',
-        // meta: { viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no' },
-      }),
+      // new HtmlWebpackPlugin({
+      //   // title: 'MES Assembly Manager',
+      //   // favicon: 'favicon.ico',
+      //   template: './template/index.html',
+      //   // meta: { viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no' },
+      // }),
       new webpack.ProgressPlugin(),
       // new ServiceWorkerWebpackPlugin({
       //   entry: path.join(__dirname, 'service-worker.js'),

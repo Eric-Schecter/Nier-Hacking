@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack-watch": "webpack --env=development --watch",
     "build": "webpack --env=production",
-    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env=development --port 8082\""
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env=development --port 8080\""
   },
   "keywords": [],
   "author": "Eric Huang <eric199002@icloud.com> (https://sumnus-eric.space/)",

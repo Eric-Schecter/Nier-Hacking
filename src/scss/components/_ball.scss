@@ -1,0 +1,6 @@
+@mixin ball($length,$color:black) {
+  width:$length;
+  height:$length;
+  border-radius: 50%;
+  background-color: $color;
+}

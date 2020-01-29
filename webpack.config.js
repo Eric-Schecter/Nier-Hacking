@@ -124,7 +124,7 @@ const developmentConfig = merge([
       chunkFilename: './js/[name].bundle.js',
     },
     devServer: {
-      hotOnly: true,
+      hot: true,
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),

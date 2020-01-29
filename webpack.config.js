@@ -100,6 +100,7 @@ const commonConfig = merge([
         { from: './src/img', to: 'img', toType: 'dir' },
         { from: './manifest.json', to: '' },
         { from: './App_Icon.png', to: '' },
+        { from: './index.html', to: '' },
         // { from: './service-worker.js', to: '' },
       ]),
       new webpack.IgnorePlugin(/cptable/),

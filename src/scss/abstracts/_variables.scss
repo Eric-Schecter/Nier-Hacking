@@ -1,0 +1,54 @@
+$black:#2D292B;
+$bgFilter:radial-gradient(transparent, grey);
+$color:#f00;
+
+$dark:#0B0C10;
+$medium:#1F2833;
+$light:#C5C6C7;
+$primary:#45A29E;
+$secondary:#66FCF1;
+// $success:
+// $danger:
+// $warning:
+// $info:
+
+$headerHeight:50px;
+$footerHeight:50px;
+$filterHeight:42px;
+
+$ContentHeight:calc(100vh - #{$headerHeight} - #{$footerHeight} - #{$filterHeight});
+
+//Apple
+$apple-light-gray-1:rgb(142,142,147);
+$apple-light-gray-2:rgb(174,174,178);
+$apple-light-gray-3:rgb(199,199,204);
+$apple-light-gray-4:rgb(209,209,214);
+$apple-light-gray-5:rgb(229,229,234);
+$apple-light-gray-6:rgb(242,242,247);
+
+$apple-dark-gray-1:rgb(142,142,147);
+$apple-dark-gray-2:rgb(99,99,102);
+$apple-dark-gray-3:rgb(72,72,74);
+$apple-dark-gray-4:rgb(58,58,60);
+$apple-dark-gray-5:rgb(44,44,46);
+$apple-dark-gray-6:rgb(28,28,30);
+
+$apple-light-blue:rgb(0,122,255);
+$apple-light-green:rgb(52,199,89);
+$apple-light-indigo:rgb(88,86,214);
+$apple-light-orange:rgb(255,149,0);
+$apple-light-pink:rgb(255,45,85);
+$apple-light-purple:rgb(175,82,222);
+$apple-light-red:rgb(255,59,48);
+$apple-light-teal:rgb(90,200,250);
+$apple-light-yellow:rgb(255,204,0);
+
+$apple-dark-blue:rgb(10,132,255);
+$apple-dark-green:rgb(48,209,88);
+$apple-dark-indigo:rgb(94,92,230);
+$apple-dark-orange:rgb(255,159,10);
+$apple-dark-pink:rgb(255,55,95);
+$apple-dark-purple:rgb(191,90,242);
+$apple-dark-red:rgb(255,69,58);
+$apple-dark-teal:rgb(100,210,255);
+$apple-dark-yellow:rgb(255,214,10);

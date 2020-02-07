@@ -1,0 +1,46 @@
+html{
+  box-sizing: border-box;
+}
+
+body{
+  background: whitesmoke;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+select{
+  background-color: transparent;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th {
+  // padding:5px;
+  border-right: 1px solid lightgray;
+}
+
+td {
+  // height: 40px;
+  border-top: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+input{
+  text-indent: 0.5em;
+}

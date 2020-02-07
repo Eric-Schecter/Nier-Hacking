@@ -1,7 +1,86 @@
+@import '../../scss/styles';
+
 .root {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+
+    & .controlArea{
+        position: fixed;
+        left: 0;
+        top: 0;
+        font-size: 2rem;
+        align-items: center;
+
+        & .btn{
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+    }
+}
+
+.cardArea {
+    width: 100vh;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    // justify-content: center;
+    // align-items: center;
+    background-color: whitesmoke;
+
+    & .area {
+        animation: showUp 0.8s ease-out forwards;
+        transform: translateY(100vh);
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .container {
+            position: absolute;
+            cursor: pointer;
+            height: 100%;
+
+            & img {
+                backface-visibility: hidden;
+                height: 100%;
+                transition: transform 0.8s ease-out, box-shadow 0.3s ease-in-out;
+                border-radius: 10%;
+            }
+
+            & .front {
+                z-index: -1;
+                transform: rotateY(180deg);
+            }
+
+            & .back {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                &:hover {
+                    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+
+        & .selected {
+            & .front {
+                transform: rotateY(0);
+            }
+
+            & .back {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}
+
+@keyframes showUp {
+    to {
+        transform: translateY(0);
+    }
 }

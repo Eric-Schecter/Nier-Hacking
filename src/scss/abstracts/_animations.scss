@@ -1,0 +1,190 @@
+@mixin showUp($time:0.5s, $delay:0s) {
+  opacity: 0;
+  animation: showUp $time $delay ease-out forwards;
+}
+
+@mixin showUpOnce($time:0.5s, $delay:0s) {
+  animation: showUp $time $delay ease-out;
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin showDown($time:0.5s, $delay:0s) {
+  opacity: 0;
+  animation: showDown $time $delay ease-out forwards;
+}
+
+@keyframes showDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin hideDown($time:0.5s, $delay:0s) {
+  opacity: 1;
+  animation: hideDown $time $delay ease-out forwards;
+}
+
+@keyframes hideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+@mixin hideUp($time:0.5s, $delay:0s) {
+  opacity: 1;
+  animation: hideUp $time $delay ease-out forwards;
+}
+
+@keyframes hideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+
+@mixin showRight($time:0.5s, $delay:0s) {
+  opacity: 0;
+  animation: showRight $time $delay ease-out forwards;
+}
+
+@keyframes showRight {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@mixin showLeft($time:0.5s, $delay:0s) {
+  opacity: 0;
+  animation: showLeft $time $delay ease-out forwards;
+}
+
+@keyframes showLeft {
+  from {
+      opacity: 0;
+      transform: translateX(25px);
+  }
+
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@mixin hideLeft($time:0.5s, $delay:0s) {
+  opacity: 1;
+  animation: hideLeft $time $delay ease-out forwards;
+}
+
+@keyframes hideLeft {
+  from {
+      opacity: 1;
+      transform: translateX(0);
+  }
+
+  to {
+      opacity: 0;
+      transform: translateX(-25px);
+  }
+}
+
+@mixin hideRight($time:0.5s, $delay:0s) {
+  opacity: 1;
+  animation: hideRight $time $delay ease-out forwards;
+}
+
+@keyframes hideRight {
+  from {
+      opacity: 1;
+      transform: translateX(0);
+  }
+
+  to {
+      opacity: 0;
+      transform: translateX(25px);
+  }
+}
+
+@mixin show($time:0.5s, $delay:0s) {
+  opacity: 0;
+  animation: show $time $delay ease-out forwards;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin rightRepect($time:0.5s, $delay:0s) {
+  animation: right-repect $time $delay ease-in-out infinite;
+}
+
+@mixin leftRepect($time:0.5s, $delay:0s) {
+  animation: left-repect $time $delay ease-in-out infinite;
+}
+
+@keyframes right-repect {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(100px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes left-repect {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-100px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

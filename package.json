@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "memorial",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -8,7 +8,7 @@
     "webpack-watch": "webpack --env=development --watch",
     "build": "webpack --env=production",
     "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env=development --port 8080\"",
-    "dev": "nodemon server/index.js & webpack --env=development --watch"
+    "dev": "nodemon server/index.js --port 32000 & webpack --env=development --watch"
   },
   "keywords": [],
   "author": "Eric Huang <eric199002@icloud.com> (https://sumnus-eric.space/)",

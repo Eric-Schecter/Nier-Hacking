@@ -5,10 +5,8 @@ const express = require('express');
 const app = express();
 const publicPath = path.resolve(__dirname, '../dist')
 const staticFiles = express.static(publicPath);
-const getImg = require('../router/getImg');
 const port = process.argv.slice(3)[0] || 3000;
 app.use(logger('dev'));
-app.use('/cardImg',getImg);
 app.use('/', staticFiles);
 
 app.use((req, res) => {

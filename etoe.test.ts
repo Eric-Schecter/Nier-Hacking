@@ -11,13 +11,15 @@ const isDebugging = () => {
   }
   const nomarl_mode = {
     headless: false,
+    slowMo: 250,
+    devtools: false,
     args: ['--start-fullscreen']
   }
-  return process.env.NODE_ENV = 'debug' ? debugging_mode : nomarl_mode;
+  return process.env.NODE_ENV === 'debug' ? debugging_mode : nomarl_mode;
 }
 
-let browser;
-let page;
+let browser:any;
+let page:any;
 let pagePhone;
 const errors = [];
 beforeAll(async () => {
@@ -26,7 +28,7 @@ beforeAll(async () => {
   await page.setViewport({ width: 1440, height: 780 })
   await page.goto('http://localhost:32000')
 
-  page.on('pageerror', e => errors.push(e.text))
+  page.on('pageerror', (e:any) => errors.push(e.text))
   // await page.setRequestInterception(true);
   // page.on('request', intersectedRequest => {
   //   if(intersectedRequest.url.includes('localhost')){

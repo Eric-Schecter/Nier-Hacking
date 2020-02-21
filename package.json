@@ -9,8 +9,9 @@
     "debug": "NODE_ENV=debug npm test",
     "webpack-watch": "webpack --env=development --watch",
     "build": "webpack --env=production",
-    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env=development --port 8080\"",
-    "dev": "node server/index.js --port 32000 & webpack --env=development --watch"
+    "start": "node dist/server/bundle.js --port 32000",
+    "watch": "webpack --env=production --addon=server --watch & webpack --env=development --watch",
+    "dev": "webpack --env=production --addon=server & webpack --env=development && node dist/server/bundle.js --port 32000"
   },
   "keywords": [],
   "author": "Eric Huang <eric199002@icloud.com> (https://sumnus-eric.space/)",
@@ -58,7 +59,9 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "terser-webpack-plugin": "^2.1.3",
+    "webpack-node-externals": "^1.7.2"
   },
   "jest": {
     "setupFilesAfterEnv": [

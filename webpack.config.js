@@ -18,7 +18,7 @@ const nodeExternals = require('webpack-node-externals');
 const commonConfig = merge([
   {
     entry: {
-      main: `${__dirname}/src/index.tsx`,
+      main: `${__dirname}/client/index.tsx`,
     },
     node: {
       fs: 'empty',

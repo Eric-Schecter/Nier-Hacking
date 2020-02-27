@@ -99,8 +99,8 @@ const commonConfig = merge([
     },
     plugins: [
       new CopyWebpackPlugin([
-        { from: './src/img', to: 'img', toType: 'dir' },
-        { from: './src/media', to: 'media', toType: 'dir' },
+        { from: './client/img', to: 'img', toType: 'dir' },
+        { from: './client/media', to: 'media', toType: 'dir' },
         { from: './manifest.json', to: '' },
         { from: './App_Icon.png', to: '' },
         { from: './index.html', to: '' },

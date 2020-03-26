@@ -5,6 +5,17 @@ export enum MoveType {
   right = 68,
   turnLeft = 74,
   turnRight = 75,
+  fire = 32,
+}
+
+export enum SysOpt {
+  pause = 80,
+}
+
+export enum Result {
+  play = 'play',
+  success = 'success',
+  fail = 'fail',
 }
 
 export interface Size {

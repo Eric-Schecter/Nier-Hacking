@@ -1,0 +1,47 @@
+.svg {
+    position: fixed;
+    top: 200px;
+    animation: up 1s 4s ease-in-out forwards;
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+
+    g {
+        transform-origin: center center;
+        transform: translate(50%, 50%) scale(1.5);
+    }
+
+    path {
+        fill: none;
+        text-shadow: 0 0 10px white;
+        stroke: white;
+        stroke-dasharray: 333;
+        opacity: 0;
+        animation: draw 2s ease-in-out forwards;
+    }
+}
+
+@keyframes up {
+    to {
+        top: 100px;
+    }
+}
+
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 333;
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+    80% {
+        fill: transparent;
+        stroke: white;
+        transform: scale(1);
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+        fill: white;
+        stroke: lightgrey;
+    }
+}

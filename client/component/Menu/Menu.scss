@@ -1,0 +1,33 @@
+@import '../../scss/styles';
+
+.root {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 100px auto;
+    overflow: hidden;
+    background-color: rgb(198, 193, 173);
+    color: rgb(71, 71, 63);
+    @include show();
+
+    & .profile {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include showLeft();
+
+        & img {
+            max-width: 90%;
+            max-height: 95%;
+        }
+    }
+}
+
+.hide {
+    @include hide();
+}

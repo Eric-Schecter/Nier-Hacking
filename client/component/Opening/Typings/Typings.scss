@@ -1,0 +1,22 @@
+.start {
+    text-align: center;
+    margin-top: 15vh;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 0.1em;
+    animation: shining 3s ease-in-out infinite;
+}
+
+@keyframes shining {
+    0% {
+        text-shadow: 0 0 10px white;
+    }
+
+    50% {
+        text-shadow: 0 0 3px white;
+    }
+
+    100% {
+        text-shadow: 0 0 10px white;
+    }
+}

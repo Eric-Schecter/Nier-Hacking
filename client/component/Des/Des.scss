@@ -1,0 +1,68 @@
+@import '../../scss/styles';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .menu{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .game{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .content {
+        padding: 10vh 0;
+        width: 80vw;
+        height: 80vh;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-column-gap: 1em;
+        background-color: rgba(100, 100, 100, 0.5);
+        color: whitesmoke;
+        font-size: 2.5rem;
+
+        .keyArea {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: black;
+
+            .key {
+                background-color: white;
+                border: 1px solid lightgrey;
+                border-radius: 0.25em;
+                padding: 0.1em 0.4em;
+                margin: 0 0.25em;
+                box-shadow: 0 0 10px white;
+            }
+
+            .keyText{
+                margin-right: 0.5em;
+            }
+        }
+
+        p {
+            letter-spacing: 0.25em;
+        }
+    }
+}
+
+.show {
+    @include showUp();
+}
+
+.hide {
+    @include hide();
+}

@@ -1,0 +1,71 @@
+@import '../../../scss/styles';
+
+.listArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @include showRight();
+
+    & .listContainer {
+        border-left: 10px solid rgba(149, 146, 131, 0.4);
+        height: 70%;
+        width: 90%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 1.5em;
+        color: rgb(65, 62, 58);
+
+        &::-webkit-scrollbar {
+            visibility: hidden;
+        }
+
+        div {
+            margin-left: 1em;
+            padding: 0.25em 40px;
+            transition: background-color 0.2s ease-in-out,
+                transform 0.2s ease-in-out,
+                color 0.2s ease-in-out;
+            transform-origin: left top;
+            width: 90%;
+            position: relative;
+
+            &::before {
+                content: '';
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+        }
+
+        li+li {
+            margin-top: 20px;
+            animation: toRight 0.5s ease-in-out;
+            @include showRight()
+        }
+
+        .notselected {
+            background-color: rgba(149, 146, 131, 0.4);
+            transform: scale(1);
+
+            &::before {
+                background-color: rgb(65, 62, 58);
+            }
+        }
+
+        .selected {
+            background-color: rgba(72, 72, 63, 0.8);
+            transform: scale(1.1);
+            color: rgb(190, 186, 172);
+
+            &::before {
+                background-color: rgb(190, 186, 172);
+            }
+        }
+    }
+}

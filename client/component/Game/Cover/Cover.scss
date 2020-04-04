@@ -1,0 +1,14 @@
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: fade 1s 0.5s linear forwards;
+}
+
+@keyframes fade {
+    to{
+        opacity: 0;
+    }
+}

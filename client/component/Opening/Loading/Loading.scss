@@ -1,0 +1,28 @@
+.loading {
+    background-color: black;
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: white;
+    letter-spacing: 0.25em;
+    transition: opacity 1s ease-out;
+
+    .loadingBar {
+        height: 2px;
+        background-color: lightgrey;
+        width: 0;
+        transition: width 0.1s ease-in-out;
+        position: fixed;
+        left: 0;
+        z-index: -1;
+    }
+}
+
+.fadeout {
+    opacity: 0;
+}

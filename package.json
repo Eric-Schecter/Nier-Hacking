@@ -8,8 +8,8 @@
     "test": "node server/index.js --port 32000 & jest",
     "debug": "NODE_ENV=debug npm test",
     "webpack-watch": "webpack --env=development --watch",
-    "build": "webpack --env=production",
-    "start": "node dist/server/bundle.js --port 32000",
+    "build": "webpack --env=production --addon=server & webpack --env=production",
+    "start": "node dist/server/bundle.js --port 32001",
     "watch": "webpack --env=production --addon=server --watch & webpack --env=development --watch",
     "dev": "webpack --env=production --addon=server & webpack --env=development && node dist/server/bundle.js --port 32000"
   },

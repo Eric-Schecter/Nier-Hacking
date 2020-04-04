@@ -1,0 +1,15 @@
+@import '../../scss/styles';
+
+.root {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(129, 128, 112);
+    overflow: hidden;
+}
+
+.hide {
+    @include hide();
+}

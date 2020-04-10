@@ -2,19 +2,29 @@ import React, { FC, useRef, useReducer, useState } from 'react';
 
 import s from './Game.scss';
 import { useKeyBoard, useDraw, usePauseSound, useSysOpt, useBgMusic } from './hooks';
-import { useSize, usePreLoad,useVistied } from '../../hooks';
+import { useSize, usePreLoad, useVistied } from '../../hooks';
 import { drawReducer } from './reducer';
-import { Props } from './types';
+import { Result, Props } from './types';
 import { files } from './files';
-import Des from '../Des';
-import Cover from './Cover';
-import Option from './Option';
-import Pause from './Pause';
-import Loading from './Loading';
-import Display from './Display';
+import Des from '../Des/Des';
+import Cover from './Cover/Cover';
+import Option from './Option/Option';
+import Loading from './Loading/Loading';
+import Display from './Display/Display';
 
 export const ratio = 2;
-export const bgRatio = 1.5;
+// export const bgRatio = 1.5;
+
+const options = {
+  pause: [
+    { key: 'P', text: 'Cancel' },
+    { key: 'R', text: 'Return to Menu' }
+  ],
+  complete: [
+    { key: 'SPACE', text: 'Next Stage' },
+    { key: 'R', text: 'Return to Menu' }
+  ]
+}
 
 const Game: FC<Props> = ({ toMenu, sceneRef }) => {
   const [changeScene, setChangeScene] = useState(false);
@@ -29,15 +39,17 @@ const Game: FC<Props> = ({ toMenu, sceneRef }) => {
   const { result, setResult, setRefresh, isEndRef } = useDraw(canvasRef, size, state, isStart, sceneRef, visited);
   usePauseSound(state, visited);
   useKeyBoard(state, dispatch, result, isEndRef, visited);
-  const { isHide,isHiding } = useSysOpt(state, toMenu, sceneRef, result, setRefresh, setResult, isEndRef, setChangeScene, visited, setVisited);
+  const { isHide, isHiding } = useSysOpt(state, toMenu, sceneRef, result, setRefresh, setResult, isEndRef, setChangeScene, visited, setVisited);
 
   return <div ref={ref} className={`${s.root} ${isHide ? s.hide : ''}`}>
     <Loading isStart={isStart} percent={percent} size={size} />
-    <Display canvasRef={canvasRef} size={size} bgRatio={bgRatio} ratio={ratio} />
+    <Display canvasRef={canvasRef} size={size} ratio={ratio} />
     <Cover changeScene={changeScene} size={size} ratio={ratio} />
-    <Pause state={state} />
-    <Option result={result} />
-    {!visited && isStart && <Des type='game' isHiding={isHiding}/>}
+    {state.isPause
+      && <Option title='PAUSED' op1={options.pause[0]} op2={options.pause[1]} />}
+    {result === Result.success
+      && <Option title='HACKING COMPLETE' op1={options.complete[0]} op2={options.complete[1]} />}
+    {!visited && isStart && <Des type='game' isHiding={isHiding} />}
   </div>
 }
 

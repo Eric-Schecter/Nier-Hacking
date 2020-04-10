@@ -9,9 +9,9 @@ import { usePreLoad, useSize } from '../../hooks';
 import { files } from './files';
 import { Props } from './types';
 
-const Opening: FC<Props> = ({ setStage }) => {
+const Opening: FC<Props> = ({ setStage,isStart,setIsStart }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { percent, isStart } = usePreLoad(files);
+  const { percent } = usePreLoad(files);
   const { size } = useSize(ref);
   const [isHide, setIsHide] = useState(false);
   const toMenu = () => setStage(1);
@@ -23,7 +23,7 @@ const Opening: FC<Props> = ({ setStage }) => {
         <Typings str='Press any key' toMenu={toMenu} setIsHide={setIsHide} />
         <Snow size={size} />
       </div>
-      : <Loading percent={percent} size={size} />}
+      : <Loading percent={percent} size={size} setIsStart={setIsStart}/>}
   </div>
 }
 

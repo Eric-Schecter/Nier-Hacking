@@ -1,5 +1,5 @@
-import { Vector } from '../../../Base';
-import { Floor } from '../../../Field';
+import { Vector } from '../../../base';
+import { Floor } from '../../../field';
 
 export const sin = (target: any):Function => {
   return class extends target {

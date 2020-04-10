@@ -1,11 +1,13 @@
-import { Vector } from '../../../Base';
-import { BulletEnemy } from '../../../Bullet';
-import { type } from '../../../Bullet/property';
+import { Vector } from '../../../base';
+import { BulletEnemy } from '../../../bullet';
+import { type ,moveMode,explodeEffect} from '../../../bullet/property';
 
 @type('ball')
-class BulletEnemyNormal extends BulletEnemy{}
+@moveMode('normal')
+@explodeEffect('normal')
+class BulletEnemyNormal extends BulletEnemy { }
 
-export const quickScatter = (target: any):Function => {
+export const quickScatter = (target: any): Function => {
   return class extends target {
     protected fireSpeed = 10;
     private angleFire = Math.PI / 180 * 30;
@@ -14,14 +16,15 @@ export const quickScatter = (target: any):Function => {
         const target1 = new Vector(pos.x, pos.y);
         const dir = new Vector(pos.x, pos.y);
         dir.sub(new Vector(this.pos.x, this.pos.y));
-        const target2 = new Vector(dir.x * Math.cos(this.angleFire) - dir.y * Math.sin(this.angleFire), dir.x * Math.sin(this.angleFire) + dir.y * Math.cos(this.angleFire));
-        const target3 = new Vector(dir.x * Math.cos(-this.angleFire) - dir.y * Math.sin(-this.angleFire), dir.x * Math.sin(-this.angleFire) + dir.y * Math.cos(-this.angleFire));
+        const mag = dir.mag() * Math.sin(this.angleFire / 2) * 2;
+        const target2 = new Vector(pos.x + Math.sin(this.angleFire) * mag, pos.y - Math.cos(this.angleFire) * mag);
+        const target3 = new Vector(pos.x - Math.sin(this.angleFire) * mag, pos.y + Math.cos(this.angleFire) * mag);
         this.bullet.add(new BulletEnemyNormal(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target1, this.explodeEffectBullet, this.audio))
+          target1, this.explodeEffects, this.audio))
         this.bullet.add(new BulletEnemyNormal(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target2, this.explodeEffectBullet, this.audio))
+          target2, this.explodeEffects, this.audio))
         this.bullet.add(new BulletEnemyNormal(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target3, this.explodeEffectBullet, this.audio))
+          target3, this.explodeEffects, this.audio))
       }
       this.count++;
     }

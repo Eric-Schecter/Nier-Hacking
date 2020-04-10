@@ -1,14 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
 import {
-  Block, Vector, Bullets, Enemys, Player,
-  ExplodeEffect, Floor, Players, ExplodeEffectPlayer, ExplodeEffectBullet
+  Block, Vector, Bullets, Enemys, Player, Floor, Players, Explodes
 } from '../class';
 import { State } from '../reducer';
 import { Size, Result } from '../types';
-import { ratio, bgRatio } from '../Game';
-import data from '../../../map';
+import { ratio } from '../Game';
+import data from '../../../data/map';
 import { getContext } from '../../Home/Home';
 import { sounds } from '../../../sounds';
+import { useFire } from './useFire';
+import { enemys as enemysData } from '../../../data/enemy';
 
 const buildBlocks = (context: CanvasRenderingContext2D, wCount: number, hCount: number) => {
   const blocks = [];
@@ -23,25 +24,6 @@ const buildBlocks = (context: CanvasRenderingContext2D, wCount: number, hCount: 
   return blocks;
 }
 
-const useFire = (state: State, player: React.RefObject<Player>) => {
-  const fireRef = useRef(0);
-  useEffect(() => {
-    let count = 0;
-    const fire = () => {
-      player.current && count % 7 === 0 && player.current.fire();
-      count++;
-      fireRef.current = requestAnimationFrame(fire);
-    };
-
-    if (state.fire) {
-      fireRef.current = requestAnimationFrame(fire);
-    } else {
-      cancelAnimationFrame(fireRef.current);
-    }
-    return () => cancelAnimationFrame(fireRef.current);
-  }, [state.fire])
-}
-
 const useStateRef = (state: State) => {
   const stateRef = useRef(state);
   useEffect(() => {
@@ -50,12 +32,24 @@ const useStateRef = (state: State) => {
   return { stateRef };
 }
 
-const reFresh = (ctx: CanvasRenderingContext2D, width: number, height: number, player: React.RefObject<Player>,
-  v: Vector, pos: { x: number, y: number }, canvasRef: React.RefObject<HTMLCanvasElement>) => {
+const clump = (current: number, min: number, max: number) => {
+  return current < min
+    ? min
+    : current > max
+      ? max
+      : current;
+}
+
+const reFresh = (ctx: CanvasRenderingContext2D, player: React.RefObject<Player>,
+  v: Vector, pos: { x: number, y: number }, canvasRef: React.RefObject<HTMLCanvasElement>, floor: Floor) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   if (canvasRef.current) { canvasRef.current.width = canvasRef.current.width }
   // ctx.clearRect(0, 0, width * bgRatio * ratio, height * bgRatio * ratio);
-  player.current && ctx.translate(width * bgRatio * ratio / 2 - player.current.pos.x, height * bgRatio * ratio / 2 - player.current.pos.y);
+  const { left, right, top, bottom, vWidth, vHeight, wWidth, wHeight } = floor.getSize;
+  player.current && ctx.translate(
+    -clump(player.current.pos.x - vWidth / 2, -left, right - (wWidth - right < vWidth / 2 ? vWidth : wWidth - right)),
+    -clump(player.current.pos.y - vHeight / 2, -top, bottom - (wHeight - bottom < vHeight / 2 ? vHeight : wHeight - bottom))
+  );
   v.x = pos.x;
   v.y = pos.y;
 }
@@ -89,28 +83,47 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
       const context = canvasRef.current.getContext('2d');
       if (!context) { return; }
       const { width, height } = size;
-      const { xRatio, yRatio, wRatio, hRatio } = data[sceneRef.current].map;
+      const { xSRatio, ySRatio, wSRatio, hSRatio, wWRatio, hWRatio } = data[sceneRef.current].map;
       const floor = new Floor(
         context,
-        new Vector(width * ratio * xRatio, height * ratio * yRatio),
-        width * ratio * wRatio, height * ratio * hRatio);
-      const { left, top, width: fWidth, height: fHeight } = floor.getSize;
+        new Vector(width * ratio * xSRatio, height * ratio * ySRatio),
+        width * ratio * wSRatio, height * ratio * hSRatio,
+        width * ratio * wWRatio, height * ratio * hWRatio,
+        width * ratio, height * ratio,
+      );
+      const { left, top, sWidth, sHeight } = floor.getSize;
       const map = createMap(context, width, height);
 
       const bulletsEnemy = new Bullets(context);
       const bulletsPlayer = new Bullets(context);
-      const explodeEffect = new ExplodeEffect(context);
-      const explodeEffectPlayer = new ExplodeEffectPlayer(context);
-      const explodeEffectBullet = new ExplodeEffectBullet(context);
-      const explodes = [explodeEffect, explodeEffectPlayer, explodeEffectBullet];
-      player.current = new Player(context, new Vector(width * ratio, height * ratio * 6 / 5), 0, explodeEffectPlayer, bulletsPlayer, audioRef.current);
+      const explodes = new Explodes(context);
+      // const explodeEffect = new ExplodeEffect(context);
+      // const explodeEffectPlayer = new ExplodeEffectPlayer(context);
+      // const explodeEffectBullet = new ExplodeEffectBullet(context);
+      // const explodes = [explodeEffect, explodeEffectPlayer, explodeEffectBullet];
       const players = new Players();
-      players.add(player.current)
+      data[sceneRef.current].players.forEach((d, i) => {
+        const temp = new d.type(context, new Vector(left + d.x * sWidth, top + d.y * sHeight), 0, explodes, bulletsPlayer, audioRef.current)
+        if (i === 0) { player.current = temp } //target the first player
+        players.add(temp)
+      })
 
       const enemys = new Enemys();
-      data[sceneRef.current].enemys.forEach(d => enemys.add(
-        new d.type(context, new Vector(left + d.x * fWidth, top + d.y * fHeight), 0, explodeEffect, bulletsEnemy, explodeEffectBullet, audioRef.current)
-      ))
+      const endlessMark = sceneRef.current === data.length - 1;
+      const createEnemys = (max: number) => {
+        const len = enemys.getList.length;
+        for (let i = 0; i < max - len; i++) {
+          const index = Math.floor(Math.random() * enemysData.length);
+          enemys.add(
+            new enemysData[index](context, new Vector(left + 0.5 * sWidth, top + 0.5 * sHeight), 0, explodes, bulletsEnemy, audioRef.current)
+          )
+        }
+      }
+      !endlessMark
+        ? data[sceneRef.current].enemys.forEach(d => enemys.add(
+          new d.type(context, new Vector(left + d.x * sWidth, top + d.y * sHeight), 0, explodes, bulletsEnemy, audioRef.current)
+        ))
+        : createEnemys(3);
       const v = new Vector(0, 0);
 
       const draw = () => {
@@ -118,26 +131,29 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
           return timer = requestAnimationFrame(draw);
         }
 
-        reFresh(context, width, height, player, v, stateRef.current.pos, canvasRef);
+        reFresh(context, player, v, stateRef.current.pos, canvasRef, floor);
         floor.display();
         // map.map(d => d.display());
+        endlessMark && createEnemys(3);
         players.update(v, stateRef.current.angle, enemys, floor);
 
         if (!isEndRef.current && visited) {
-          if ((!enemys.getList.length || player.current.isDead()) && !isEndRef.current) {
+          if (endlessMark && player.current.isDead()) {
             isEndRef.current = true;
-            !enemys.getList.length
-              ? setResult(Result.success)
-              : setResult(Result.fail)
+            setResult(Result.fail);
+          } else if ((!enemys.getList.length || player.current.isDead())) {
+            isEndRef.current = true;
+            setResult(enemys.getList.length ? Result.fail : Result.success);
           }
-          !player.current.isDead() && enemys.getList.forEach(d => d.update(player.current.pos, floor));
-          bulletsEnemy.getList.forEach(d => d.update(player.current.pos));
-          bulletsEnemy.update([players, bulletsPlayer], floor);
+          enemys.getList.forEach(d => d.update(player.current.pos, floor, enemys.getList));
           bulletsPlayer.update([enemys, bulletsEnemy], floor);
         }
+        
+        bulletsEnemy.getList.forEach(d => d.update(player.current.pos));
+        bulletsEnemy.update([players, bulletsPlayer], floor);
 
         enemys.update();
-        explodes.forEach(d => d.display());
+        explodes.display(players);
 
         timer = requestAnimationFrame(draw);
       }

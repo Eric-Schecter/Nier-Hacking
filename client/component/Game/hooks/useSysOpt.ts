@@ -4,7 +4,7 @@ import { delay } from '../../../functions/delay';
 import { SysOpt } from '../../../types';
 import { Result } from '../types';
 import { getContext } from '../../Home/Home';
-import data from '../../../map';
+import data from '../../../data/map';
 import { sounds } from '../../../sounds';
 
 export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.MutableRefObject<number>,
@@ -76,6 +76,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
 
   useEffect(() => {
     const restart = async () => {
+      await delay(500);
       setChangeScene(true);
       audioRef.current?.play(sounds.changeScene.src);
       await delay(500);

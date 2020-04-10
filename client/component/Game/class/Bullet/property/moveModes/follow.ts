@@ -1,10 +1,11 @@
-import { Vector } from '../../../Base';
+import { Vector } from '../../../base';
 
 export const follow = (target: any): Function => {
   return class extends target {
     private speed = 5;
     private count = 0;
-    protected update = (pos: Vector) => {
+    update = (pos: Vector) => {
+      if(!pos){return}
       this.v = new Vector(pos.x, pos.y)
       this.v.sub(this.pos);
       this.v.normalize();

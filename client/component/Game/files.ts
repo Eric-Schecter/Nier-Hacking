@@ -11,7 +11,9 @@ export const files = {
     '/media/stop.ogg',
     '/media/start.ogg',
     '/media/bg.mp3',
-    '/media/menu.ogg'
+    '/media/menu.ogg',
+    '/media/electric.ogg',
+    '/media/electronic.ogg',
   ],
   img: []
 }

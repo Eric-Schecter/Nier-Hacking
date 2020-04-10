@@ -1,4 +1,5 @@
-export { moveMode } from './moveModes';
-export { fireMode } from './fireModes';
-export { type } from './types';
-export { state } from './states';
+export { moveModeP } from './moveModes';
+export { fireModeP } from './fireModes';
+export { typeP } from './types';
+export { explodeEffectP } from './explodeEffect';
+// export { state } from './states';

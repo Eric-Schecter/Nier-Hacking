@@ -103,7 +103,7 @@ const commonConfig = merge([
         { from: './client/media', to: 'media', toType: 'dir' },
         { from: './manifest.json', to: '' },
         { from: './App_Icon.png', to: '' },
-        { from: './index.html', to: '' },
+        // { from: './index.html', to: '' },
         // { from: './service-worker.js', to: '' },
       ]),
       new webpack.IgnorePlugin(/cptable/),
@@ -124,7 +124,7 @@ const developmentConfig = merge([
     output: {
       path: path.resolve(__dirname, 'dist/client/'),
       // publicPath: '/',
-      filename: './js/bundle.js',
+      filename: './js/[hash].bundle.js',
       chunkFilename: './js/[name].bundle.js',
     },
     devServer: {
@@ -133,6 +133,10 @@ const developmentConfig = merge([
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProgressPlugin(),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './index.html',
+      }),
     ],
   }]);
 
@@ -141,7 +145,7 @@ const productionConfig = merge([
     output: {
       path: path.resolve(__dirname, 'dist/client/'),
       // publicPath: '/',
-      filename: './js/bundle.js',
+      filename: './js/[hash].bundle.js',
       chunkFilename: './js/[name].lazy-chunk.js',
     },
     devServer: {
@@ -170,6 +174,10 @@ const productionConfig = merge([
       // }),
       // new WebpackBundleAnalyzer(),
       // new CompressionWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './index.html',
+      }),
     ],
   },
 ]);
@@ -179,8 +187,8 @@ const analyzeConfig = merge([
     output: {
       path: path.resolve(__dirname, 'dist/client/'),
       // publicPath: '/',
-      filename: './js/bundle.js',
-      chunkFilename: './js/[name].lazy-chunk.js',
+      filename: './js/[hash].bundle.js',
+      chunkFilename: './js/[name].bundle.js',
     },
     devServer: {
       open: true,
@@ -188,7 +196,8 @@ const analyzeConfig = merge([
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './template/index.html',
+        filename: 'index.html',
+        template: './index.html',
       }),
       new webpack.ProgressPlugin(),
       // new WebpackBundleAnalyzer(),

@@ -32,7 +32,7 @@ const Snow: FC<Props> = ({ size }) => {
 		className={s.canvas}
 		style={{ width: `${size.width}px`, height: `${size.height}px` }}
 		width={size.width * ratio} height={size.height * ratio}
-	/>
+	>Your browser can not support canvas</canvas>
 }
 
 export default Snow;

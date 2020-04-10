@@ -1,14 +1,10 @@
-import { Vector } from './Vector';
-import { Floor } from '../Field';
-import { ExplodeEffect, ExplodeEffectPlayer } from '../Explode';
+import { Vector } from './vector';
+import { Floor } from '../field';
+import { Explodes } from '../explode';
 import { AudioRef } from '../../../../hooks/useAudio';
+import { Players } from '../player';
 
-interface Check {
-  borderCheck: (v: Vector, area: Floor) => { xBorder: boolean, yBorder: boolean };
-  collisionCheck: (object: { pos: Vector, getSize: { width: number, height: number } }) => boolean;
-}
-
-export abstract class Unit implements Check {
+export abstract class Unit{
   protected radian = this.angle / 180 * Math.PI;
   protected yTop = 80;
   protected yBottom = 40;
@@ -50,8 +46,13 @@ export abstract class FireUnit extends Unit {
   protected v = new Vector(0, 0);
   protected life = 1;
   protected soundHit = '';
+  protected hasEffect = false;
+  protected volume = 0.5;
   constructor(ctx: CanvasRenderingContext2D, pos: Vector, angle: number, protected audio: AudioRef) {
     super(ctx, pos, angle);
+  }
+  get getHasEffect() {
+    return this.hasEffect;
   }
   get getLife() {
     return this.life;
@@ -70,34 +71,33 @@ export abstract class FireUnit extends Unit {
   protected fire = () => {
     if (!this.isFire) {
       if (this.sound && this.audio) {
-        this.audio.play(this.sound, 0.5);
+        this.audio.play(this.sound, this.volume);
       }
       this.isFire = true;
     }
   }
-  protected update = (pos?: Vector) => { }
+  update = () => { }
   explode = () => { }
+  applyEffect = (objects: Players) => { }
 }
 
 export abstract class MoveUnit extends Unit {
   protected life = 0;
   protected soundDead = '';
-  protected explodeEffect: ExplodeEffect | ExplodeEffectPlayer;
   protected isProtected = false;
   protected damagePeriod = false;
   protected damagePeriodTime = 100;
   protected audio: any;
   protected color: [number, number, number] = [0, 0, 0];
-  constructor(ctx: CanvasRenderingContext2D, pos: Vector, angle: number, explodeEffect: ExplodeEffect | ExplodeEffectPlayer) {
+  constructor(ctx: CanvasRenderingContext2D, pos: Vector, angle: number, protected explodeEffects: Explodes) {
     super(ctx, pos, angle);
-    this.explodeEffect = explodeEffect;
   }
   isDead = () => {
     return this.life <= 0;
   }
   explode = () => {
     this.audio.play(this.soundDead);
-    this.explodeEffect.add(this.pos, this.color);
+    this.explodeEffect();
   }
   protected invincibleMode = () => {
     this.damagePeriod = true;
@@ -105,6 +105,7 @@ export abstract class MoveUnit extends Unit {
       this.damagePeriod = false;
     }, this.damagePeriodTime);
   }
+  protected abstract explodeEffect = () => { };
   protected abstract hitEffect = () => { };
   hit = () => {
     if (this.damagePeriod) { return; }

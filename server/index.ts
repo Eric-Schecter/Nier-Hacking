@@ -4,7 +4,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const publicPath = path.resolve(__dirname, '../dist/client')
-const staticFiles = express.static(publicPath);
+const oneHour = 3600000;
+const staticFiles = express.static(publicPath,{ maxAge: oneHour });
 const port = process.argv.slice(3)[0] || 3000;
 app.use(logger('dev'));
 app.use('/', staticFiles);

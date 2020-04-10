@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { delay } from '../../../functions/delay';
 import { SysOpt, Direction } from '../../../types';
-import data from '../../../map';
+import data from '../../../data/map';
 import { getContext } from '../../Home';
 import { sounds } from '../../../sounds';
 

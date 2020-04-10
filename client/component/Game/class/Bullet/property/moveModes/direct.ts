@@ -1,4 +1,4 @@
-import { Vector } from '../../../Base';
+import { Vector } from '../../../base';
 
 export const direct = (target: any): Function => {
   return class extends target {

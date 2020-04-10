@@ -3,6 +3,7 @@ export const guard = (target: any):Function => {
     protected width = this.isProtected ? 200 : 50;
     protected height = this.isProtected ? 200 : 100;
     protected life = 5;
+    protected gravity = 5;
     protected draw = () => {
       this.ctx.save();
       this.rotate();

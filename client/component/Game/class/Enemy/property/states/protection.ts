@@ -1,4 +1,4 @@
-import { Vector,Unit } from '../../../Base';
+import { Vector,Unit } from '../../../base';
 
 export class ProtectionField extends Unit {
   private radius = 0;

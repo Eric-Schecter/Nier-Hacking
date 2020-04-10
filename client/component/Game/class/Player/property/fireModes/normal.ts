@@ -1,6 +1,6 @@
-import { Vector } from '../../../Base';
-import { BulletPlayer } from '../../../Bullet';
-import { type,moveMode } from '../../../Bullet/property';
+import { Vector } from '../../../base';
+import { BulletPlayer } from '../../../bullet';
+import { type,moveMode } from '../../../bullet/property';
 
 @type('rect')
 @moveMode('direct')

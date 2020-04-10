@@ -1,12 +1,16 @@
-import { Vector } from '../../../Base';
-import { BulletEnemy } from '../../../Bullet';
-import { state, type } from '../../../Bullet/property';
+import { Vector } from '../../../base';
+import { BulletEnemy } from '../../../bullet';
+import { state, type,moveMode,explodeEffect } from '../../../bullet/property';
 
 @type('ball')
 @state('invincible')
+@moveMode('normal')
+@explodeEffect('normal')
 export class BulletEnemyInvincible extends BulletEnemy { }
 
 @type('ball')
+@moveMode('normal')
+@explodeEffect('normal')
 export class BulletEnemyNormal extends BulletEnemy { }
 
 export const random = (target: any): Function => {
@@ -21,13 +25,13 @@ export const random = (target: any): Function => {
         const target3 = new Vector(this.pos.x + Math.cos((baseAngle + 180) / 180 * Math.PI), this.pos.y + Math.sin((baseAngle + 180) / 180 * Math.PI));
         const target4 = new Vector(this.pos.x + Math.cos((baseAngle + 270) / 180 * Math.PI), this.pos.y + Math.sin((baseAngle + 270) / 180 * Math.PI));
         this.bullet.add(new BulletEnemyNormal(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target1, this.explodeEffectBullet, this.audio))
+          target1, this.explodeEffects, this.audio))
         this.bullet.add(new BulletEnemyInvincible(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target2, this.explodeEffectBullet, this.audio))
+          target2, this.explodeEffects, this.audio))
         this.bullet.add(new BulletEnemyNormal(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target3, this.explodeEffectBullet, this.audio))
+          target3, this.explodeEffects, this.audio))
         this.bullet.add(new BulletEnemyInvincible(this.ctx, new Vector(this.pos.x, this.pos.y),
-          target4, this.explodeEffectBullet, this.audio))
+          target4, this.explodeEffects, this.audio))
         this.countAngle += 10;
       }
       this.count++;

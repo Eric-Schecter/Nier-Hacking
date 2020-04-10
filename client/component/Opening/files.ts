@@ -9,5 +9,9 @@ export const files = {
     '/img/bg.jpg',
     // '/img/loading1.png',
     '/img/loading2.jpg',
+    '/img/stage/0.jpg',
+    '/img/stage/1.jpg',
+    '/img/stage/2.jpg',
+    '/img/stage/3.jpg',
   ]
 }

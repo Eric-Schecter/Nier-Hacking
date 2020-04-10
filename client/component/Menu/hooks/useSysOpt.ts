@@ -9,7 +9,7 @@ export const useSysOpt = (visited: boolean, setVisited: Function) => {
     const hide = async (e: KeyboardEvent) => {
       if (e.keyCode === SysOpt.pause) {
         setIsHiding(true);
-        await delay(500);
+        await delay(250);
         setVisited(true);
       }
     }

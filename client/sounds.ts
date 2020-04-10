@@ -7,8 +7,8 @@ export const sounds = {
   game: {
     src: '/media/bg.mp3',
     volume: 1,
-    restartPoint: 23,
-    endPoint: 162.5,
+    restartPoint: 24.2,
+    endPoint: 163,
   },
   select: {
     src: '/media/button_select.wav',
@@ -43,13 +43,19 @@ export const sounds = {
   hitEnemy: {
     src: '/media/enemy_hit.wav',
   },
-  hitShield:{
-    src:'/media/core_hit_shield.wav',
+  hitShield: {
+    src: '/media/core_hit_shield.wav',
   },
   shootPlayer: {
     src: '/media/player_shoot.wav',
   },
   shootEnemy: {
     src: '/media/enemy_shoot.wav',
+  },
+  effectElectronic: {
+    src: '/media/electronic.ogg',
+  },
+  effectField: {
+    src: '/media/electric.ogg',
   }
 }

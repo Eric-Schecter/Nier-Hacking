@@ -1,6 +1,6 @@
-import React, { useRef, createContext, useContext } from 'react';
+import React, { useRef, createContext, useContext,useState } from 'react';
 
-import Game from '../Game';
+import Game from '../Game/Game';
 import Opening from '../Opening';
 import Menu from '../Menu';
 import { Stage } from './types';
@@ -17,14 +17,16 @@ export const getContext = () => {
 
 const Home = () => {
   const sceneRef = useRef<number>(0);
-  const { stage, setStage, audioRef } = useStage();
+  const [isStart,setIsStart] = useState(false);
+  const { stage, setStage, audioRef } = useStage(isStart);
+  const toMenu = () => setStage(1);
 
   return <Context.Provider value={audioRef}>
     {stage === Stage.opening
-      ? <Opening setStage={setStage} />
+      ? <Opening setStage={setStage} isStart={isStart} setIsStart={setIsStart} />
       : stage === Stage.menu
         ? <Menu setStage={setStage} sceneRef={sceneRef} />
-        : <Game toMenu={() => setStage(1)} sceneRef={sceneRef} />}
+        : <Game toMenu={toMenu} sceneRef={sceneRef} />}
   </Context.Provider>
 }
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import s from './List.scss';
-import data from '../../../map';
+import data from '../../../data/map';
 import { Props } from './types';
 
 const List: FC<Props> = ({ listRef, selected }) =>
@@ -10,7 +10,7 @@ const List: FC<Props> = ({ listRef, selected }) =>
       {data.map((d, i) =>
         <li key={i} style={{ animationDelay: `${i / 10}s` }} >
           <div className={i === selected ? s.selected : s.notselected}>
-            Stage {i}
+            Stage {i === data.length - 1 ? '∞' : i}
           </div>
         </li>
       )}

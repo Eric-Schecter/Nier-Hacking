@@ -1,3 +1,5 @@
+@import '../../../scss/styles';
+
 .loading {
     background-color: black;
     display: flex;
@@ -20,6 +22,47 @@
         position: fixed;
         left: 0;
         z-index: -1;
+    }
+
+    .wave{
+        color:rgb(255,216,2);
+        border-radius: 50%;
+        position: fixed;
+        bottom: 100px;
+        letter-spacing: 0;
+        font-size: 1rem;
+
+        &::before,
+        &::after{
+            content: '';
+            position: absolute;
+            left: -15%;
+            top: -75%;
+            border: 5px solid rgb(255,216,2);
+            width: 3rem;
+            height: 3rem;
+            transform: rotate(45deg);
+        }
+
+        &::after{
+            animation: expand 1s linear infinite;
+        }
+    }
+}
+
+@keyframes expand {
+    0%{
+        border: 5px solid rgb(255,216,2);
+        transform: rotate(45deg) scale(1);
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        border: 2.5px solid rgb(255,216,2);
+        transform: rotate(45deg) scale(1.5);
     }
 }
 

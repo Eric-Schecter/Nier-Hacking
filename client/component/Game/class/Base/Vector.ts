@@ -34,7 +34,14 @@ export class Vector {
   dis = (pos: Vector) => {
     return Math.abs(this.mag() - pos.mag());
   }
+  reverse = () => {
+    this.x = -this.x;
+    this.y = -this.y;
+  }
   rotate = (angle: number) => {
 
+  }
+  isEqual = (v: Vector) => {
+    return this.x === v.x && this.y === v.y;
   }
 }

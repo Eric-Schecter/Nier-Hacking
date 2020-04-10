@@ -1,6 +1,7 @@
 export const arrow = (target: any): Function => {
   return class extends target {
     protected color = [94, 90, 86];
+    protected life = 3;
     protected draw = () => {
       const size = 50;
       this.ctx.save();

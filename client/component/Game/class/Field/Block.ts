@@ -1,4 +1,4 @@
-import { Vector } from '../Base';
+import { Vector } from '../base';
 
 export class Block {
   private width: number = 90;

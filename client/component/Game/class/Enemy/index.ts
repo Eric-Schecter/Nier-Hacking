@@ -1,7 +1,7 @@
-import { Vector, MoveUnit, System } from '../Base';
-import { ExplodeEffect, ExplodeEffectBullet } from '../explode';
-import { Bullets } from '../Bullet';
-import { Floor } from '../Field';
+import { Vector, MoveUnit, System } from '../base';
+import { Explodes } from '../explode';
+import { Bullets } from '../bullet';
+import { Floor } from '../field';
 import { ProtectionField } from './property/states/protection'
 import { sounds } from '../../../../sounds';
 const { explodeEnemy, hitEnemy, hitShield } = sounds;
@@ -20,10 +20,13 @@ export class Enemy extends MoveUnit {
   protected height = this.isProtected ? 200 : 100;
   protected fireSpeed = 100;
   protected protection = new ProtectionField(this.ctx, this.pos, this.angle);
+  private a = new Vector(0, 0);
+  protected gravity = 10;
+  private gravityIndex = 500;
 
   constructor(ctx: CanvasRenderingContext2D, pos: Vector, angle: number,
-    explodeEffect: ExplodeEffect, protected bullet: Bullets, protected explodeEffectBullet: ExplodeEffectBullet, protected audio: any) {
-    super(ctx, pos, angle, explodeEffect);
+    explodeEffect: Explodes, protected bullet: Bullets, protected audio: any) {
+    super(ctx, pos, angle,explodeEffect);
   }
   get getProtection() {
     return this.protection;
@@ -38,6 +41,31 @@ export class Enemy extends MoveUnit {
     this.isProtected = status;
   }
 
+  get getA() {
+    return this.a;
+  }
+  set setA(v: Vector) {
+    this.a = v;
+  }
+
+  protected applyRepulision = (enemys: Array<Enemy>) => {
+    const aArr = enemys.map(d => {
+      if (!d.pos || !this.pos || this.pos.isEqual(d.pos)) { return new Vector(0, 0) }
+      const temp = new Vector(this.pos.x, this.pos.y);
+      temp.sub(d.pos);
+      if (temp.mag() > 150) { return new Vector(0, 0) }
+      temp.div(temp.mag() * temp.mag() * this.gravity);
+      temp.mult(this.gravityIndex);
+      return temp;
+    })
+    const a = aArr.reduce((a, b) => {
+      const temp = new Vector(a.x, a.y);
+      temp.add(b);
+      return temp
+    }, this.a);
+    this.setA = a;
+  }
+
   protected hitEffect = () => {
     this.audio.play(this.soundHit, 0.5)
     if (this.isProtected) { return; }
@@ -48,11 +76,14 @@ export class Enemy extends MoveUnit {
       this.opacity = 1;
     }, 1000 / 60);
   }
+  protected explodeEffect = () => { }
   protected move = (pos: Vector, area: Floor) => { };
   protected fire = (pos: Vector) => { }
-  update = (pos: Vector, area: Floor) => {
+  update = (pos: Vector, area: Floor, enemys: Array<Enemy>) => {
+    this.applyRepulision(enemys);
     this.move(pos, area);
     this.fire(pos);
+    this.setA = new Vector(0, 0);
   }
 
   display = () => {

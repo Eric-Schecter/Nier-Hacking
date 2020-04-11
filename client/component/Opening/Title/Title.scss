@@ -1,12 +1,10 @@
 .svg {
-    position: fixed;
-    top: 200px;
     animation: up 1s 4s ease-in-out forwards;
     filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
 
-    g {
-        transform-origin: center center;
-        transform: translate(50%, 50%) scale(1.5);
+    g .container {
+        transform-origin: left center;
+        transform: translate(0, 50%) scale(1.5);
     }
 
     path {
@@ -21,7 +19,7 @@
 
 @keyframes up {
     to {
-        top: 100px;
+        transform: translateY(-100px);
     }
 }
 

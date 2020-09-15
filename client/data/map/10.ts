@@ -16,7 +16,7 @@ class CoreEnemy extends Enemy { }
 class FollowEnemy extends Enemy { }
 
 const data = {
-  profile: '/img/stage/1.jpg',
+  profile: './img/stage/1.jpg',
   map: {
     xSRatio: 0.5,
     ySRatio: 0.5,

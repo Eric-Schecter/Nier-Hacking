@@ -88,6 +88,7 @@ const commonConfig = merge([
               limit: 100000,
               name: '[name].[ext]',
               outputPath: 'img/',
+              esModule: false,
             },
           },
         },

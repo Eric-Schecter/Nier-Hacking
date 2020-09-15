@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "nier_hacking",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -8,13 +8,14 @@
     "test": "node server/index.js --port 32000 & jest",
     "debug": "NODE_ENV=debug npm test",
     "webpack-watch": "webpack --env=development --watch",
-    "build": "webpack --env=production --addon=server & webpack --env=production",
+    "build": "webpack --env=production",
+    "build-server": "webpack --env=production --addon=server",
     "start": "node dist/server/bundle.js --port 32001",
     "watch": "webpack --env=production --addon=server --watch & webpack --env=development --watch",
     "dev": "webpack --env=production --addon=server & webpack --env=development && node dist/server/bundle.js --port 32000"
   },
   "keywords": [],
-  "author": "Eric Huang <eric199002@icloud.com> (https://sumnus-eric.space/)",
+  "author": "Eric Huang<eric199002@icloud.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
@@ -39,6 +40,7 @@
     "css-loader": "^1.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",

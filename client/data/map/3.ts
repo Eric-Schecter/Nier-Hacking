@@ -9,7 +9,7 @@ import { PlayerNormal } from '../player';
 class CoreEnemy extends Enemy { }
 
 const data = {
-  profile: '/img/stage/0.jpg',
+  profile: './img/stage/0.jpg',
   map: {
     xSRatio: 0.5,
     ySRatio: 0.5,

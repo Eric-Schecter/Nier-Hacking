@@ -24,7 +24,7 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
         break;
       // case SysOpt.return:
       //   setIsHide(true);
-      //   audioRef.current('/media/button_enter.wav')
+      //   audioRef.current('./media/button_enter.wav')
       //   await delay(500);
       //   setStage(0);
       //   break;

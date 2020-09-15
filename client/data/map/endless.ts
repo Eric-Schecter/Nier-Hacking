@@ -1,7 +1,7 @@
 import { PlayerNormal } from '../player';
 
 const data = {
-  profile: '/img/stage/3.jpg',
+  profile: './img/stage/3.jpg',
   map: {
     xSRatio: 0.5,
     ySRatio: 0.5,

@@ -21,7 +21,7 @@ class GuardEnemy extends Enemy { }
 class StaticEnemy extends Enemy { }
 
 const data = {
-  profile: '/img/stage/2.jpg',
+  profile: './img/stage/2.jpg',
   map: {
     xSRatio: 0.5,
     ySRatio: 0.5,

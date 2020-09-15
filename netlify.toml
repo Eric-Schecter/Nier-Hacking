@@ -1,0 +1,7 @@
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+  Cache-Control = "public, max-age=604800"
+
+ command = "CI= npm run build"

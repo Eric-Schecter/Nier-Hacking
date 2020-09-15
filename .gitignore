@@ -2,7 +2,6 @@
 .eslintrc.json
 .git
 backup/
-ashx/
 dist/
 Web.config
 node_modules/

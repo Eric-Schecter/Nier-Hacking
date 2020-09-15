@@ -1,6 +1,5 @@
 import React, { FC, useRef, useEffect } from 'react';
-
-import s from './Snow.scss';
+import styles from './styles.module.scss';
 import { Props } from './types'
 import { SnowSys } from './SnowSys';
 
@@ -29,7 +28,7 @@ const Snow: FC<Props> = ({ size }) => {
 
 	return <canvas
 		ref={ref}
-		className={s.canvas}
+		className={styles.canvas}
 		style={{ width: `${size.width}px`, height: `${size.height}px` }}
 		width={size.width * ratio} height={size.height * ratio}
 	>Your browser can not support canvas</canvas>

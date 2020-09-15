@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-import s from './Title.scss';
+import styles from './styles.module.scss';
 import { Props } from './types';
 
 const Title: FC<Props> = ({ str }) =>
-  <div className={s.title}>
+  <div className={styles.title}>
     {str.split('').map((d, i) =>
-      <p key={i} className={s.showRight} style={{ animationDelay: `${i / 10}s` }}>{d}</p>)}
+      <p key={i} className={styles.showRight} style={{ animationDelay: `${i / 10}s` }}>{d}</p>)}
   </div>
 
 export default Title;

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
-import s from './Title.scss';
+import styles from './styles.module.scss';
 import { Props } from './types'
 
 const Title: FC<Props> = ({ size: { width } }) => {
 	const step = 0.2;
-	return <svg className={s.svg} width={width} height='200'>
+	return <svg className={styles.svg} width={width} height='200'>
 		<g style={{ transform: `translateX(${width / 2 - 400}px)` }}>
-			<g className={s.container}>
+			<g className={styles.container}>
 				<path d="M54.2,51.2c0,1.1-0.2,3-0.6,5.6c-0.4,2.4-1.6,3.6-3.8,3.6c-1.3,0-2.8-0.8-4.6-2.5c-9.5-9-20.5-22-32.8-39.1
 		l-0.2,8l-0.1,8c0,1.9,0,4.9,0.1,8.8c0.1,3.9,0.1,6.8,0.1,8.8c0,6.3-1.2,9.5-3.7,9.5c-1.3,0-2.3-0.4-3.1-1.2c-0.7-0.7-1-1.6-1-2.6
 		c0-1,0.1-2.5,0.2-4.5C5,51.5,5.1,50,5.1,49c0-1.5,0-3.6,0.1-6.5c0.1-2.9,0.1-5.1,0.1-6.5c0-1.5,0-3.9-0.1-7s-0.1-5.5-0.1-7

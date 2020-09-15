@@ -3,7 +3,7 @@ import { State } from '../reducer';
 import { delay } from '../../../functions/delay';
 import { SysOpt } from '../../../types';
 import { Result } from '../types';
-import { getContext } from '../../Home/Home';
+import { useGetContext } from '../../Home/Home';
 import data from '../../../data/map';
 import { sounds } from '../../../sounds';
 
@@ -11,7 +11,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
   result: string, setRefresh: Function, setResult: Function,
   isEndRef: React.MutableRefObject<boolean>, setChangeScene: Function, visited: boolean, setVisited: Function,
 ) => {
-  const audioRef = getContext();
+  const audioRef = useGetContext();
   const [isHide, setIsHide] = useState(false);
   const [isHiding, setIsHiding] = useState(false);
   useEffect(() => {

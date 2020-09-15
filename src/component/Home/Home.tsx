@@ -1,4 +1,4 @@
-import React, { useRef, createContext, useContext,useState } from 'react';
+import React, { useRef, createContext, useContext, useState } from 'react';
 
 import Game from '../Game/Game';
 import Opening from '../Opening';
@@ -7,7 +7,7 @@ import { Stage } from './types';
 import { useStage } from './hooks/useStage';
 
 const Context = createContext<any>({});
-export const getContext = () => {
+export const useGetContext = () => {
   const context = useContext(Context);
   if (context === undefined) {
     throw new Error('Components must be used within <Home />')
@@ -17,10 +17,10 @@ export const getContext = () => {
 
 const Home = () => {
   const sceneRef = useRef<number>(0);
-  const [isStart,setIsStart] = useState(false);
+  const [isStart, setIsStart] = useState(false);
   const { stage, setStage, audioRef } = useStage(isStart);
   const toMenu = () => setStage(1);
-
+  
   return <Context.Provider value={audioRef}>
     {stage === Stage.opening
       ? <Opening setStage={setStage} isStart={isStart} setIsStart={setIsStart} />

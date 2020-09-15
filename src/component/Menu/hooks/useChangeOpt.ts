@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { delay } from '../../../functions/delay';
 import { SysOpt, Direction } from '../../../types';
 import data from '../../../data/map';
-import { getContext } from '../../Home';
+import { useGetContext } from '../../Home/Home';
 import { sounds } from '../../../sounds';
 
 export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObject<number>,
-  listRef: React.RefObject<HTMLUListElement>,visited:boolean) => {
+  listRef: React.RefObject<HTMLUListElement>, visited: boolean) => {
   const selectedRef = useRef(0);
   const [selected, setSelected] = useState(0);
-  const audioRef = getContext();
+  const audioRef = useGetContext();
   const keydown = async (e: KeyboardEvent) => {
     const sHieght = listRef.current?.scrollHeight || 0;
     const sTop = listRef.current?.scrollTop || 0;
@@ -65,7 +65,7 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
 
   const [isHide, setIsHide] = useState(false);
   useEffect(() => {
-    if(visited){
+    if (visited) {
       setTimeout(() => {
         window.addEventListener('keydown', keydown)
       }, 500);

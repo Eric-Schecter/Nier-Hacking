@@ -11,7 +11,6 @@ export const rebound = (target: any):Function => {
     }
     protected move = (pos: Vector,area:Floor) => {
       this.borderRebound(this.v, area)
-      this.v;
       this.v.normalize();
       this.v.mult(this.speed * 4);
       this.pos.add(this.v);

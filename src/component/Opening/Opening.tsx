@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 
-import s from './Opening.scss';
+import styles from './styles.module.scss';
 import Title from './Title';
 import Typings from './Typings';
 import Loading from './Loading';
@@ -16,9 +16,9 @@ const Opening: FC<Props> = ({ setStage,isStart,setIsStart }) => {
   const [isHide, setIsHide] = useState(false);
   const toMenu = () => setStage(1);
 
-  return <div ref={ref} className={`${s.root} ${isHide ? s.hide : ''}`}>
+  return <div ref={ref} className={`${styles.root} ${isHide ? styles.hide : ''}`}>
     {isStart
-      ? <div className={s.bg}>
+      ? <div className={styles.bg}>
         <Title size={size} />
         <Typings str='Press any key' toMenu={toMenu} setIsHide={setIsHide} />
         <Snow size={size} />

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import s from './Loading.scss';
+import styles from './styles.module.scss';
 import { Props } from './types';
 import { delay } from '../../../functions/delay';
 
@@ -14,10 +14,10 @@ const Loading: FC<Props> = ({ percent, size, setIsStart }) => {
 		}
 	}
 	return <div onClick={start}
-		className={`${s.loading} ${isFade ? s.fadeout : ''}`}>
+		className={`${styles.loading} ${isFade ? styles.fadeout : ''}`}>
 		<p>{percent}%</p>
-		<p className={s.loadingBar} style={{ width: `${size.width * percent / 100}px` }} />
-		{percent === 100 && <div className={s.wave} >Start</div>}
+		<p className={styles.loadingBar} style={{ width: `${size.width * percent / 100}px` }} />
+		{percent === 100 && <div className={styles.wave} >Start</div>}
 	</div>
 }
 

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { getContext } from '../../Home';
+import { useGetContext } from '../../Home';
 import { sounds } from '../../../sounds';
 
 export const useBgMusic = () => {
   const { game } = sounds;
-  const audioRef = getContext();
+  const audioRef = useGetContext();
   useEffect(() => {
     audioRef.current?.clear();
     audioRef.current?.play(game.src, game.volume, game.restartPoint, game.endPoint);

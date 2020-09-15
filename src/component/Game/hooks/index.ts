@@ -1,4 +1,4 @@
-export { useKeyBoard } from './useKeyBoard';
+export { useKeyBoard } from './useKeyboard';
 export { useDraw } from './useDraw';
 export { usePauseSound } from './usePauseSound';
 export { useSysOpt } from './useSysOpt';

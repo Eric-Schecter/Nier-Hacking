@@ -6,7 +6,7 @@ import { State } from '../reducer';
 import { Size, Result } from '../types';
 import { ratio } from '../Game';
 import data from '../../../data/map';
-import { getContext } from '../../Home/Home';
+import { useGetContext } from '../../Home/Home';
 import { sounds } from '../../../sounds';
 import { useFire } from './useFire';
 import { enemys as enemysData } from '../../../data/enemy';
@@ -68,7 +68,7 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
   const [refresh, setRefresh] = useState(false);
   const [result, setResult] = useState(Result.play);
   const isEndRef = useRef(false);
-  const audioRef = getContext();
+  const audioRef = useGetContext();
   useFire(state, player);
   useEffect(() => {
     if (isEndRef.current && result === Result.success) {
@@ -148,7 +148,7 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
           enemys.getList.forEach(d => d.update(player.current.pos, floor, enemys.getList));
           bulletsPlayer.update([enemys, bulletsEnemy], floor);
         }
-        
+
         bulletsEnemy.getList.forEach(d => d.update(player.current.pos));
         bulletsEnemy.update([players, bulletsPlayer], floor);
 

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useReducer, useState } from 'react';
 
-import s from './Game.scss';
+import styles from './styles.module.scss';
 import { useKeyBoard, useDraw, usePauseSound, useSysOpt, useBgMusic } from './hooks';
 import { useSize, usePreLoad, useVistied } from '../../hooks';
 import { drawReducer } from './reducer';
@@ -41,7 +41,7 @@ const Game: FC<Props> = ({ toMenu, sceneRef }) => {
   useKeyBoard(state, dispatch, result, isEndRef, visited);
   const { isHide, isHiding } = useSysOpt(state, toMenu, sceneRef, result, setRefresh, setResult, isEndRef, setChangeScene, visited, setVisited);
 
-  return <div ref={ref} className={`${s.root} ${isHide ? s.hide : ''}`}>
+  return <div ref={ref} className={`${styles.root} ${isHide ? styles.hide : ''}`}>
     <Loading isStart={isStart} percent={percent} size={size} />
     <Display canvasRef={canvasRef} size={size} ratio={ratio} />
     <Cover changeScene={changeScene} size={size} ratio={ratio} />

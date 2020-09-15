@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import s from './Typings.scss';
+import styles from './styles.module.scss';
 import { Props } from './types';
 import { delay } from '../../../functions/delay';
-import { getContext } from '../../Home/Home';
+import { useGetContext } from '../../Home/Home';
 import { sounds } from '../../../sounds';
 
 const Typings: FC<Props> = ({ str, toMenu, setIsHide }) => {
 	const [typingStr, setTypingStr] = useState('');
-	const audioRef = getContext();
+	const audioRef = useGetContext();
 	useEffect(() => {
 		const type = async () => {
 			const arr = str.split('');
@@ -32,7 +32,7 @@ const Typings: FC<Props> = ({ str, toMenu, setIsHide }) => {
 		}
 		return () => window.removeEventListener('keydown', hide);
 	}, [typingStr])
-	return <div className={s.start}>{typingStr}</div>
+	return <div className={styles.start}>{typingStr}</div>
 }
 
 export default Typings;

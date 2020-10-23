@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { delay } from '../../../functions/delay';
 import { SysOpt, Direction } from '../../../types';
 import data from '../../../data/map';
@@ -10,7 +10,7 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
   const selectedRef = useRef(0);
   const [selected, setSelected] = useState(0);
   const audioRef = useGetContext();
-  const keydown = async (e: KeyboardEvent) => {
+  const keydown = useCallback(async (e: KeyboardEvent) => {
     const sHieght = listRef.current?.scrollHeight || 0;
     const sTop = listRef.current?.scrollTop || 0;
     const cHieght = listRef.current?.clientHeight || 0;
@@ -22,12 +22,6 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
         await delay(500);
         setStage(2);
         break;
-      // case SysOpt.return:
-      //   setIsHide(true);
-      //   audioRef.current('./media/button_enter.wav')
-      //   await delay(500);
-      //   setStage(0);
-      //   break;
       case Direction.down:
         if (selectedRef.current === data.length - 1) {
           setSelected(0);
@@ -56,7 +50,7 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
       default:
         break;
     }
-  }
+  }, [audioRef, listRef, sceneRef, setStage])
   const [src, setSrc] = useState(data[0].profile);
   useEffect(() => {
     selectedRef.current = selected;
@@ -71,6 +65,6 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
       }, 500);
     }
     return () => window.removeEventListener('keydown', keydown);
-  }, [visited])
+  }, [visited, keydown])
   return { src, isHide, selected }
 }

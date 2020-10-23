@@ -19,7 +19,7 @@ const Typings: FC<Props> = ({ str, toMenu, setIsHide }) => {
 			}
 		}
 		type();
-	}, [])
+	}, [str])
 	useEffect(() => {
 		const hide = async () => {
 			setIsHide(true);
@@ -31,7 +31,7 @@ const Typings: FC<Props> = ({ str, toMenu, setIsHide }) => {
 			window.addEventListener('keydown', hide)
 		}
 		return () => window.removeEventListener('keydown', hide);
-	}, [typingStr])
+	}, [typingStr,audioRef,str,setIsHide,toMenu])
 	return <div className={styles.start}>{typingStr}</div>
 }
 

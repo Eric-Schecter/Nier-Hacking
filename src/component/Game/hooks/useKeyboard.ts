@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { MoveType, Result } from '../types';
 import { SysOpt } from '../../../types';
 import { State, Action } from '../reducer';
@@ -6,10 +6,10 @@ const keyArr = Object.values(MoveType).filter(d => typeof (d) === 'number');
 const keyPairs = Object.entries(MoveType).filter(d => typeof (d[1]) === 'number');
 
 export const useKeyBoard = (state: State, dispatch: React.Dispatch<Action>, result: string,
-  isEndRef:React.MutableRefObject<boolean>,visited:boolean) => {
+  isEndRef: React.MutableRefObject<boolean>, visited: boolean) => {
   const [downKeys, setDownKeys] = useState<Array<number>>([]);
   const downKeysRef = useRef<Array<number>>([]);
-  const down = (e: KeyboardEvent) => {
+  const down = useCallback((e: KeyboardEvent) => {
     if ((state.isPause && e.keyCode !== SysOpt.pause) || result !== Result.play || isEndRef.current) {
       return;
     }
@@ -19,15 +19,15 @@ export const useKeyBoard = (state: State, dispatch: React.Dispatch<Action>, resu
       downKeysRef.current.push(e.keyCode)
       setDownKeys([...downKeysRef.current])
     }
-  }
-  const up = (e: any) => {
+  }, [dispatch, isEndRef, result, state])
+  const up = useCallback((e: any) => {
     if (e.keyCode === SysOpt.pause || state.isPause || result !== Result.play) { return; }
     const filtered = downKeysRef.current.filter(d => d !== e.keyCode);
     downKeysRef.current = filtered;
     setDownKeys(filtered)
-  }
+  }, [result, state])
   useEffect(() => {
-    if(visited){
+    if (visited) {
       window.addEventListener('keydown', down);
       window.addEventListener('keyup', up);
     }
@@ -36,7 +36,7 @@ export const useKeyBoard = (state: State, dispatch: React.Dispatch<Action>, resu
       window.removeEventListener('keydown', down);
       window.removeEventListener('keyup', up);
     }
-  }, [visited])
+  }, [visited, down, up])
 
   useEffect(() => {
     if (!downKeys.length || state.isPause || result !== Result.play) {
@@ -60,5 +60,5 @@ export const useKeyBoard = (state: State, dispatch: React.Dispatch<Action>, resu
     arr.forEach(d => {
       keyPairs.forEach((sd) => sd[1] === d && dispatch({ type: sd[0] }))
     })
-  }, [downKeys, state.isPause])
+  }, [downKeys, state.isPause, dispatch, result])
 }

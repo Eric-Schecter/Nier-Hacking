@@ -25,14 +25,14 @@ export const usePreLoad = (files:{audio:Array<string>,img:Array<string>}) => {
         setLoaded(pre => pre + 1)
       }
     })
-  }, [])
+  }, [files])
   useEffect(() => {
     if (loaded === files.audio.length + files.img.length) {
       setTimeout(() => {
         setIsStart(true);
       }, 1000);
     }
-  }, [loaded])
+  }, [loaded,files])
 
   return { percent, isStart };
 }

@@ -13,13 +13,13 @@ export const useStage = (isStart:boolean) => {
       audioRef.current?.play(opening.src ,opening.volume,opening.restartPoint);
     }
     stagePreRef.current = stage;
-  }, [stage,isStart])
+  }, [stage,isStart,audioRef,opening])
   useEffect(() => {
     if (isStart) {
       audioRef.current?.clear();
       audioRef.current?.play(opening.src ,opening.volume,opening.restartPoint);
     }
     stagePreRef.current = stage;
-  }, [isStart])
+  }, [isStart,audioRef,opening,stage])
   return { stage, setStage, audioRef };
 }

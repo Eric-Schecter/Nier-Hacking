@@ -9,7 +9,7 @@ Then I build this repo with the knowledge I learned from my job.
 
 ## Get Started
 #### Play Online   
-[https:nier-hacking.netlify.app](https:nier-hacking.netlify.app) 
+[https:nier-hacking.netlify.app](https://nier-hacking.netlify.app) 
 
 #### Play locally
 1. Clone the repo  
@@ -46,6 +46,6 @@ This project is licensed under [![License: MIT](https://img.shields.io/badge/Lic
 
 ## Contact
 * Email:[eric199002@icloud.com](eric199002@icloud.com)
-* Twitter:[https:twitter.com/nikoniko600](https:twitter.com/nikoniko600)
-* Repo:[https:github.com/Eric-Schecter/Nier-Hacking](https:github.com/Eric-Schecter/Nier-Hacking)
-* App:[https:nier-hacking.netlify.app](https:nier-hacking.netlify.app) 
+* Twitter:[https://twitter.com/nikoniko600](https://twitter.com/nikoniko600)
+* Repo:[https://github.com/Eric-Schecter/Nier-Hacking](https://github.com/Eric-Schecter/Nier-Hacking)
+* App:[https://nier-hacking.netlify.app](https://nier-hacking.netlify.app) 

@@ -1,4 +1,3 @@
-import { Vector } from '../../../base';
 import { Floor } from '../../../field';
 
 export const free = (target: any): Function => {

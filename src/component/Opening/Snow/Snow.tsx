@@ -24,7 +24,7 @@ const Snow: FC<Props> = ({ size }) => {
 		}
 
 		return () => cancelAnimationFrame(timer);
-	}, [ref.current])
+	}, [ref,size])
 
 	return <canvas
 		ref={ref}

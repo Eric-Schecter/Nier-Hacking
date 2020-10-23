@@ -6,6 +6,6 @@ export const useSize = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
       setSize({ width: ref.current.offsetWidth, height: ref.current.offsetHeight })
     }
-  }, [ref.current])
+  }, [ref])
   return { size };
 }

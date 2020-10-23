@@ -6,8 +6,10 @@ export const useBgMusic = () => {
   const { game } = sounds;
   const audioRef = useGetContext();
   useEffect(() => {
-    audioRef.current?.clear();
-    audioRef.current?.play(game.src, game.volume, game.restartPoint, game.endPoint);
-    return () => audioRef.current?.clear();
-  }, [])
+    const audio = audioRef.current;
+    if (!audio) { return }
+    audio.clear();
+    audio.play(game.src, game.volume, game.restartPoint, game.endPoint);
+    return () => audio.clear();
+  }, [audioRef, game])
 }

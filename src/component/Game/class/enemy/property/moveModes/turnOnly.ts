@@ -1,5 +1,4 @@
 import { Vector } from '../../../base';
-import { Floor } from '../../../field';
 
 export const turnOnly = (target: any) :Function=> {
   return class extends target {

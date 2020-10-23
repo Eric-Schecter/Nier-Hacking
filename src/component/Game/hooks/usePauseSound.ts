@@ -15,5 +15,5 @@ export const usePauseSound = (state: State, visited: boolean) => {
       }
     }
     isFirstRef.current = false;
-  }, [state.isPause])
+  }, [state.isPause,audioRef])
 }

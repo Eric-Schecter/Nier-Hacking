@@ -18,5 +18,5 @@ export const useFire = (state: State, player: React.RefObject<Player>) => {
       cancelAnimationFrame(fireRef.current);
     }
     return () => cancelAnimationFrame(fireRef.current);
-  }, [state.fire])
+  }, [state.fire,player])
 }

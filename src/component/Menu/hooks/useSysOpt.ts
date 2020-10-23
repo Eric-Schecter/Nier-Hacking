@@ -17,6 +17,6 @@ export const useSysOpt = (visited: boolean, setVisited: Function) => {
       ? window.addEventListener('keydown', hide)
       : window.removeEventListener('keydown', hide);
     return () => window.removeEventListener('keydown', hide);
-  }, [visited])
+  }, [visited,setIsHiding,setVisited])
   return { isHiding };
 }

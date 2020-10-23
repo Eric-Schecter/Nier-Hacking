@@ -4,14 +4,12 @@ import { Size } from '../types';
 import { ratio } from '../Game';
 
 export const useCover = (ref: React.RefObject<HTMLCanvasElement>, changeScene: boolean, size: Size) => {
-
   useEffect(() => {
     let timer: number;
-    if (ref.current && changeScene) {
+    if (ref.current) {
       const context = ref.current.getContext('2d');
       if (!context) { return; }
       const { width, height } = size;
-      // if (!width || !height) { return; }
       const cover = new Cover(context, width * ratio, height * ratio)
 
       const draw = () => {
@@ -26,5 +24,5 @@ export const useCover = (ref: React.RefObject<HTMLCanvasElement>, changeScene: b
     }
 
     return () => cancelAnimationFrame(timer);
-  }, [ref.current, changeScene])
+  }, [ref, changeScene, size])
 }

@@ -27,7 +27,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
       ? window.addEventListener('keydown', hide)
       : window.removeEventListener('keydown', hide);
     return () => window.removeEventListener('keydown', hide);
-  }, [state.isPause, visited, result])
+  }, [state.isPause, visited, result, audioRef, toMenu])
 
   useEffect(() => {
     const hide = async (e: KeyboardEvent) => {
@@ -41,7 +41,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
       ? window.addEventListener('keydown', hide)
       : window.removeEventListener('keydown', hide);
     return () => window.removeEventListener('keydown', hide);
-  }, [visited])
+  }, [visited,setVisited])
 
   const preResult = useRef('');
   useEffect(() => {
@@ -72,7 +72,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
         : window.removeEventListener('keydown', restart);
     }
     return () => window.removeEventListener('keydown', restart);
-  }, [result])
+  }, [result,audioRef,isEndRef,sceneRef,setChangeScene,setRefresh,setResult])
 
   useEffect(() => {
     const restart = async () => {
@@ -87,7 +87,7 @@ export const useSysOpt = (state: State, toMenu: Function, sceneRef: React.Mutabl
       isEndRef.current = false;
     }
     result === Result.fail && restart()
-  }, [result])
+  }, [result,audioRef,isEndRef,setChangeScene,setRefresh,setResult])
 
   return { isHide, isHiding }
 }

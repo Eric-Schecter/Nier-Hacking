@@ -2,7 +2,7 @@ import React, { FC, useRef, useReducer, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { useKeyBoard, useDraw, usePauseSound, useSysOpt, useBgMusic } from './hooks';
-import { useSize, usePreLoad, useVistied } from '../../hooks';
+import { useSize, usePreLoad, useVisited } from '../../hooks';
 import { drawReducer } from './reducer';
 import { Result, Props } from './types';
 import { files } from './files';
@@ -35,7 +35,7 @@ const Game: FC<Props> = ({ toMenu, sceneRef }) => {
   const { size } = useSize(ref);
   const { initState, reducer } = drawReducer;
   const [state, dispatch] = useReducer(reducer, initState);
-  const { visited, setVisited } = useVistied('game');
+  const { visited, setVisited } = useVisited('game');
   const { result, setResult, setRefresh, isEndRef } = useDraw(canvasRef, size, state, isStart, sceneRef, visited);
   usePauseSound(state, visited);
   useKeyBoard(state, dispatch, result, isEndRef, visited);

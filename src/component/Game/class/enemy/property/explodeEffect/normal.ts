@@ -1,4 +1,4 @@
-import { Effect, add, ParticleSystem, WaveSystem, ShapeSystem, Explodes } from '../../../explode';
+import { Effect, add, ParticleSystem, WaveSystem, ShapeSystem } from '../../../explode';
 
 @add(ParticleSystem)
 @add(WaveSystem)

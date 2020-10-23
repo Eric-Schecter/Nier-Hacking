@@ -1,7 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import {
-  Block, Vector, Bullets, Enemys, Player, Floor, Players, Explodes
-} from '../class';
+import { Vector, Bullets, Enemys, Player, Floor, Players, Explodes } from '../class';
 import { State } from '../reducer';
 import { Size, Result } from '../types';
 import { ratio } from '../Game';
@@ -10,19 +8,6 @@ import { useGetContext } from '../../Home/Home';
 import { sounds } from '../../../sounds';
 import { useFire } from './useFire';
 import { enemys as enemysData } from '../../../data/enemy';
-
-const buildBlocks = (context: CanvasRenderingContext2D, wCount: number, hCount: number) => {
-  const blocks = [];
-  for (let i = 0; i < wCount; i++) {
-    blocks.push(new Block(context, new Vector(100 * i, 0)));
-    blocks.push(new Block(context, new Vector(100 * i, 100 * (hCount - 1))))
-  }
-  for (let i = 0; i < hCount; i++) {
-    blocks.push(new Block(context, new Vector(0, 100 * i)));
-    blocks.push(new Block(context, new Vector(100 * (wCount - 1), 100 * i)))
-  }
-  return blocks;
-}
 
 const useStateRef = (state: State) => {
   const stateRef = useRef(state);
@@ -40,11 +25,12 @@ const clump = (current: number, min: number, max: number) => {
       : current;
 }
 
-const reFresh = (ctx: CanvasRenderingContext2D, player: React.RefObject<Player>,
+const reFreash = (ctx: CanvasRenderingContext2D, player: React.RefObject<Player>,
   v: Vector, pos: { x: number, y: number }, canvasRef: React.RefObject<HTMLCanvasElement>, floor: Floor) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
-  if (canvasRef.current) { canvasRef.current.width = canvasRef.current.width }
-  // ctx.clearRect(0, 0, width * bgRatio * ratio, height * bgRatio * ratio);
+  if (canvasRef.current) {
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  }
   const { left, right, top, bottom, vWidth, vHeight, wWidth, wHeight } = floor.getSize;
   player.current && ctx.translate(
     -clump(player.current.pos.x - vWidth / 2, -left, right - (wWidth - right < vWidth / 2 ? vWidth : wWidth - right)),
@@ -52,13 +38,6 @@ const reFresh = (ctx: CanvasRenderingContext2D, player: React.RefObject<Player>,
   );
   v.x = pos.x;
   v.y = pos.y;
-}
-
-const createMap = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-  const wCount = Math.floor(width * ratio / 100);
-  const hCount = Math.floor(height * ratio / 100);
-  const blocks = buildBlocks(ctx, wCount, hCount);
-  return blocks;
 }
 
 export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Size, state: State, isStart: boolean,
@@ -69,6 +48,8 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
   const [result, setResult] = useState(Result.play);
   const isEndRef = useRef(false);
   const audioRef = useGetContext();
+  const sizeRef = useRef(size);
+  sizeRef.current = size;
   useFire(state, player);
   useEffect(() => {
     if (isEndRef.current && result === Result.success) {
@@ -76,13 +57,13 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
         audioRef.current?.play(sounds.success.src)
       }, 700);
     }
-  }, [isEndRef.current])
+  }, [isEndRef, audioRef, result])
   useEffect(() => {
     let timer: number;
     if (canvasRef.current && isStart) {
       const context = canvasRef.current.getContext('2d');
       if (!context) { return; }
-      const { width, height } = size;
+      const { width, height } = sizeRef.current;
       const { xSRatio, ySRatio, wSRatio, hSRatio, wWRatio, hWRatio } = data[sceneRef.current].map;
       const floor = new Floor(
         context,
@@ -92,15 +73,10 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
         width * ratio, height * ratio,
       );
       const { left, top, sWidth, sHeight } = floor.getSize;
-      const map = createMap(context, width, height);
 
       const bulletsEnemy = new Bullets(context);
       const bulletsPlayer = new Bullets(context);
       const explodes = new Explodes(context);
-      // const explodeEffect = new ExplodeEffect(context);
-      // const explodeEffectPlayer = new ExplodeEffectPlayer(context);
-      // const explodeEffectBullet = new ExplodeEffectBullet(context);
-      // const explodes = [explodeEffect, explodeEffectPlayer, explodeEffectBullet];
       const players = new Players();
       data[sceneRef.current].players.forEach((d, i) => {
         const temp = new d.type(context, new Vector(left + d.x * sWidth, top + d.y * sHeight), 0, explodes, bulletsPlayer, audioRef.current)
@@ -131,9 +107,9 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
           return timer = requestAnimationFrame(draw);
         }
 
-        reFresh(context, player, v, stateRef.current.pos, canvasRef, floor);
+        reFreash(context, player, v, stateRef.current.pos, canvasRef, floor);
         floor.display();
-        // map.map(d => d.display());
+
         endlessMark && createEnemys(3);
         players.update(v, stateRef.current.angle, enemys, floor);
 
@@ -161,6 +137,6 @@ export const useDraw = (canvasRef: React.RefObject<HTMLCanvasElement>, size: Siz
     }
 
     return () => cancelAnimationFrame(timer);
-  }, [canvasRef.current, isStart, refresh, visited])
+  }, [canvasRef, isStart, refresh, visited, audioRef, sceneRef, stateRef])
   return { result, setResult, setRefresh, isEndRef };
 }

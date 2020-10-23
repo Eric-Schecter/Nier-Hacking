@@ -1,4 +1,4 @@
-import React, { useRef, createContext, useContext, useState } from 'react';
+import React, { useRef, createContext, useContext, useState, useEffect } from 'react';
 
 import Game from '../Game/Game';
 import Opening from '../Opening';
@@ -20,6 +20,11 @@ const Home = () => {
   const [isStart, setIsStart] = useState(false);
   const { stage, setStage, audioRef } = useStage(isStart);
   const toMenu = () => setStage(1);
+  useEffect(()=>{
+    if(isStart){
+      document.body.requestPointerLock();
+    }
+  },[isStart])
   
   return <Context.Provider value={audioRef}>
     {stage === Stage.opening

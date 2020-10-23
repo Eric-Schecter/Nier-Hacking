@@ -3,25 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.54",
-    "@types/react": "^16.9.45",
+    "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
-    "pixi.js": "^5.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.1",
     "react-scripts": "^3.4.3",
-    "react-transition-group": "^4.4.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0",
-    "rxjs": "^6.6.2",
-    "typescript": "^3.7.5",
-    "uuid": "^8.3.0"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,11 +32,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/react-transition-group": "^4.4.0",
-    "@types/uuid": "^8.0.0",
-    "node-sass": "^4.14.1",
-    "react-router-dom": "^5.2.0"
+    "node-sass": "^4.14.1"
   }
 }

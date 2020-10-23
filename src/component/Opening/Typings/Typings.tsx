@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 
 import styles from './styles.module.scss';
 import { Props } from './types';
@@ -20,8 +20,11 @@ const Typings: FC<Props> = ({ str, toMenu, setIsHide }) => {
 		}
 		type();
 	}, [str])
+	const ishideRef = useRef(true);
 	useEffect(() => {
 		const hide = async () => {
+			if(!ishideRef.current){return}
+			ishideRef.current = false;
 			setIsHide(true);
 			audioRef.current?.play(sounds.enter.src);
 			await delay(500);

@@ -10,12 +10,15 @@ export const useChangeOpt = (setStage: Function, sceneRef: React.MutableRefObjec
   const selectedRef = useRef(0);
   const [selected, setSelected] = useState(0);
   const audioRef = useGetContext();
+  const ishideRef = useRef(true);
   const keydown = useCallback(async (e: KeyboardEvent) => {
     const sHieght = listRef.current?.scrollHeight || 0;
     const sTop = listRef.current?.scrollTop || 0;
     const cHieght = listRef.current?.clientHeight || 0;
     switch (e.keyCode) {
       case SysOpt.space:
+        if(!ishideRef.current){return}
+        ishideRef.current = false;
         setIsHide(true);
         audioRef.current?.play(sounds.enter.src);
         sceneRef.current = selectedRef.current;

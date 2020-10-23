@@ -3,6 +3,3 @@
 
   [headers.values]
   Cache-Control = "public, max-age=604800"
-
-[build]
- command = "CI= npm run build"

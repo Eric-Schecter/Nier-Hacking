@@ -13,7 +13,6 @@ import Loading from './Loading/Loading';
 import Display from './Display/Display';
 
 export const ratio = 2;
-// export const bgRatio = 1.5;
 
 const options = {
   pause: [

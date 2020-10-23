@@ -19,13 +19,13 @@ export const useKeyBoard = (state: State, dispatch: React.Dispatch<Action>, resu
       downKeysRef.current.push(e.keyCode)
       setDownKeys([...downKeysRef.current])
     }
-  }, [dispatch, isEndRef, result, state])
+  }, [dispatch, isEndRef])//eslint-disable-line
   const up = useCallback((e: any) => {
     if (e.keyCode === SysOpt.pause || state.isPause || result !== Result.play) { return; }
     const filtered = downKeysRef.current.filter(d => d !== e.keyCode);
     downKeysRef.current = filtered;
     setDownKeys(filtered)
-  }, [result, state])
+  }, []) //eslint-disable-line
   useEffect(() => {
     if (visited) {
       window.addEventListener('keydown', down);

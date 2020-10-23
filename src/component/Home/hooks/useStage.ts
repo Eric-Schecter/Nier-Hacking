@@ -8,18 +8,18 @@ export const useStage = (isStart:boolean) => {
   const [stage, setStage] = useState(0);
   const { audioRef } = useAudio();
   useEffect(() => {
-    if (stagePreRef.current !== 0 && stagePreRef.current !== 1 && isStart) {
-      audioRef.current?.clear();
-      audioRef.current?.play(opening.src ,opening.volume,opening.restartPoint);
-    }
-    stagePreRef.current = stage;
-  }, [stage,isStart,audioRef,opening])
-  useEffect(() => {
-    if (isStart) {
+    if ((stagePreRef.current !== 0 && stagePreRef.current !== 1 && isStart)) {
       audioRef.current?.clear();
       audioRef.current?.play(opening.src ,opening.volume,opening.restartPoint);
     }
     stagePreRef.current = stage;
   }, [isStart,audioRef,opening,stage])
+  useEffect(() => {
+    if (isStart) {
+      audioRef.current?.clear();
+      audioRef.current?.play(opening.src ,opening.volume,opening.restartPoint);
+    }
+    stagePreRef.current = 0;
+  }, [isStart,audioRef,opening])
   return { stage, setStage, audioRef };
 }

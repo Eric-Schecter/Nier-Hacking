@@ -9,7 +9,7 @@ Then I build this repo with the knowledge I learned from my job.
 
 ## Get Started
 #### Play Online   
-[https:nier-hacking.netlify.app](https://nier-hacking.netlify.app) 
+[https://nier-hacking.netlify.app](https://nier-hacking.netlify.app) 
 
 #### Play locally
 1. Clone the repo  

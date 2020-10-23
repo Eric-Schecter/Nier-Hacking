@@ -16,15 +16,26 @@ Then I build this repo with the knowledge I learned from my job.
 ```
 git clone git@github.com:Eric-Schecter/Nier-Hacking.git
 ```
-2. Install npm packages  
+2. Open Folder
+```
+cd Nier-Hacking
+```
+3. Install npm packages  
 ```
 npm install
 ```
-3. Start game  
+4. Start game  
 ```
 npm start
 ```
 Then visit 'http://localhost:3000'
+
+## Usage
+<kbd>Space</kbd> - Enter/Fire  
+<kbd>W/S/A/D</kbd> - Up/Down/Left/Right  
+<kbd>J/K</kbd> - Turn Left/Turn Right  
+<kbd>R</kbd> - Go Back  
+<kbd>P</kbd> - Pause  
 
 ## Built with
 * React
